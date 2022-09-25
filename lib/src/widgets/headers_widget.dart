@@ -157,4 +157,47 @@ class _HeaderZigZagPainter extends CustomPainter {
   }
 }
 
+class HeaderPico extends StatelessWidget {
+  const HeaderPico({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: CustomPaint(
+        painter: _HeaderPicoPainter(),
+      ),
+    );
+  }
+}
+
+class _HeaderPicoPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+   
+   final paint = Paint();
+
+   paint.color = Color(0xFF615AAB);
+   paint.style = PaintingStyle.fill;
+
+   final path = Path();
+
+   path.lineTo(0, size.height * 0.3);
+   path.lineTo(size.width * 0.5, size.height * 0.4);
+   path.lineTo(size.width, size.height * 0.3);
+   path.lineTo(size.width, 0);
+
+
+   canvas.drawPath(path, paint);
+
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    
+    return true;
+  }
+}
+
 
