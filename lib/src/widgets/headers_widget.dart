@@ -73,6 +73,46 @@ class _HeaderDiagonalPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
       return true;
   }
+}
+
+class HeaderTriangular extends StatelessWidget {
+  const HeaderTriangular({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      child: CustomPaint(
+        painter: _HeaderTriangularPainter(),
+      ),
+
+    );
+  }
+}
+
+class _HeaderTriangularPainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+   
+    final paint = Paint();
+
+    paint.color = Color(0xFF615AAB);
+    paint.style = PaintingStyle.fill;
+
+    final path = Path();
+
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, size.height);
+
+    canvas.drawPath(path, paint);
+
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;    
+  }
 
 
 }
