@@ -331,4 +331,61 @@ class _BottomWavePainter extends CustomPainter{
   }
 }
 
+class HeaderWavesGradient extends StatelessWidget {
+  const HeaderWavesGradient({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      child: CustomPaint(
+        painter: _HeaderWavesGradientPainter(),
+      ),
+    );
+  }
+}
+
+class _HeaderWavesGradientPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+
+    final Rect rect = Rect.fromCircle(
+      center: Offset(155.0, 65.0), 
+      radius: 120.0,
+      );
+
+    final Gradient gradiente = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors:<Color>[
+        Color(0xFF6D05E8),
+        Color(0xFFC012FF),
+        Color(0xFF6D05FA),
+      ]
+      );
+
+    final paint = Paint().. shader = gradiente.createShader(rect);
+
+    paint.color = Color(0xFF615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 20.0;
+
+    final path = Path();
+
+    path.lineTo(0, size.height * 0.3);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.35, size.width * 0.5, size.height * 0.3);
+    path.quadraticBezierTo(size.width * 0.75, size.height * 0.25, size.width, size.height * 0.3);
+    path.lineTo(size.width, 0);
+
+
+    canvas.drawPath(path, paint);
+
+  }
+  
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true; 
+  }
+  }
 
