@@ -286,4 +286,49 @@ class _HeaderWavesPainter extends CustomPainter {
   }
 }
 
+class BottomWave extends StatelessWidget {
+  const BottomWave({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      child: CustomPaint(
+        painter: _BottomWavePainter(),
+      ),
+    );
+  }
+}
+
+class _BottomWavePainter extends CustomPainter{
+  @override
+  void paint(Canvas canvas, Size size) {
+
+    final paint = Paint();
+
+    paint.color = Color(0xFF615AAB);
+    paint.style = PaintingStyle.fill;
+    paint.strokeWidth = 10.0;
+
+    final path = Path();
+
+    path.moveTo(0, size.height * 0.7);
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, size.height * 0.7);
+    path.quadraticBezierTo(size.width * 0.75, size.height * 0.76, size.width * 0.5, size.height * 0.7);
+    path.quadraticBezierTo(size.width * 0.25, size.height * 0.65, 0, size.height* 0.7);
+
+
+    canvas.drawPath(path, paint);
+    
+    }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
 
