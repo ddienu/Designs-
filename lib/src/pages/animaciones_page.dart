@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as Math;
 
 
 
@@ -38,7 +39,16 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       duration: const Duration( milliseconds: 4000),
       );
 
-      rotacion = Tween(begin: 0.0, end: 2.0).animate(controller);
+      rotacion = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+
+      controller.addListener(() {
+
+        print('Status: ${controller.status}');
+
+       if(controller.status == AnimationStatus.completed){
+        controller.reverse();
+       }
+       });
       
     super.initState();
   }
@@ -60,7 +70,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       builder: (BuildContext context, Widget? child){
 
 
-        print (rotacion.value);
+        //print (rotacion.value);
 
         return  Transform.rotate
         (angle: rotacion.value,
