@@ -39,8 +39,14 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       duration: const Duration( milliseconds: 4000),
       );
 
-      rotacion = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+      rotacion = Tween(begin: 0.0, end: 2 * Math.pi).animate(
+        CurvedAnimation(
+          parent: controller, 
+          curve: Curves.easeInOutBack
+          )
+      );
 
+      //To check the status of the controller.
       controller.addListener(() {
 
         print('Status: ${controller.status}');
