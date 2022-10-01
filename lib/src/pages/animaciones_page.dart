@@ -30,6 +30,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   late AnimationController controller;
   late Animation<double> rotacion;
   late Animation<double> opacidad;
+  late Animation<double> moverDerecha;
 
   @override
 
@@ -52,6 +53,8 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
           curve: Interval(0, 0.5, curve: Curves.easeOut),
           )
           );
+
+      moverDerecha = Tween(begin: 0.0, end: 200.0).animate( controller );
 
       //To check the status of the controller.
       controller.addListener(() {
@@ -83,12 +86,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       child: const Cuadrado(),
       builder: (BuildContext context, Widget? child){
 
-        return  Transform.rotate(
-        angle: rotacion.value,
-        child: Opacity(
-          opacity: opacidad.value,
-          child: child,
-          )
+        return  Transform.translate(
+          offset: Offset(moverDerecha.value, 0),
+          child: Transform.rotate(
+          angle: rotacion.value,
+          child: Opacity(
+            opacity: opacidad.value,
+            child: child,
+            )
+          ),
         );
       }
       );
