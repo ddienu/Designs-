@@ -47,7 +47,11 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
           )
       );
 
-      opacidad = Tween(begin: 0.1, end: 1.0).animate(controller);
+      opacidad = Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(
+          parent: controller, 
+          curve: Interval(0, 0.5, curve: Curves.easeOut),
+          )
+          );
 
       //To check the status of the controller.
       controller.addListener(() {
