@@ -30,6 +30,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
   late AnimationController controller;
   late Animation<double> rotacion;
   late Animation<double> opacidad;
+  late Animation<double> opacidadOut;
   late Animation<double> moverDerecha;
   late Animation<double> moverFrente;
 
@@ -42,10 +43,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       duration: const Duration( milliseconds: 4000),
       );
 
-      rotacion = Tween(begin: 0.0, end: 2 * Math.pi).animate(
+      rotacion = Tween(begin: 0.0, end: 3 * Math.pi).animate(
         CurvedAnimation(
           parent: controller, 
-          curve: Curves.easeInOutBack
+          curve: Curves.easeOut
           )
       );
 
@@ -54,6 +55,13 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
           curve: Interval(0, 0.5, curve: Curves.easeOut),
           )
           );
+
+      opacidadOut = Tween(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(
+          parent: controller, 
+          curve: Interval(0.75, 1.0)
+          )
+      );
 
       moverDerecha = Tween(begin: 0.0, end: 120.0).animate(
         CurvedAnimation(
@@ -69,7 +77,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
         print('Status: ${controller.status}');
 
        if(controller.status == AnimationStatus.completed){
-        controller.reverse();
+        controller.reset();
        }
        });
       
@@ -100,9 +108,12 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
             child: Transform.rotate(
             angle: rotacion.value,
             child: Opacity(
-              opacity: opacidad.value,
-              child: child,
-              )
+              opacity: opacidadOut.value,
+              child: Opacity(
+                opacity: opacidad.value,
+                child: child,
+                ),
+            )
             ),
           ),
         );
