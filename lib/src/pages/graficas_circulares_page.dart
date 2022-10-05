@@ -31,8 +31,8 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
         child: Container(
           width: 300.0,
           height: 300.0,
-          color: Colors.red,
-          child: RadialProgress(porcentaje: 40.0),
+          //color: Colors.red,
+          child: RadialProgress(porcentaje: porcentaje),
         )
         ),
     );
