@@ -33,23 +33,68 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Stack(
+            //alignment: AlignmentDirectional.bottomCenter,
             children: [
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.black),
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.purpleAccent),
+              Row(
+                children: [
+                  CustomRadialProgress(porcentaje: porcentaje, color: Colors.blue)
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  CustomRadialProgress(porcentaje: porcentaje, color: Colors.black)
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomRadialProgress(porcentaje: porcentaje, color: Colors.red)
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 50, top: 47),
+                child: Row(
+                  children: [
+                    CustomRadialProgress(porcentaje: porcentaje, color: Colors.yellow)
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 160, top: 47),
+                child: Row(
+                  children: [
+                    CustomRadialProgress(porcentaje: porcentaje, color: Colors.green)
+                  ],
+                ),
+              )
             ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.yellow),
-              CustomRadialProgress(porcentaje: porcentaje, color: Colors.green),
-            ],
-          ),
+            
+          )
         ],
       )
+      // Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+
+      //     Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: [
+      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.black),
+      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.purpleAccent),
+      //       ],
+      //     ),
+      //     Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: [
+      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.yellow),
+      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.green),
+      //       ],
+      //     ),
+      //   ],
+      // )
     );
   }
 }
@@ -68,8 +113,8 @@ class CustomRadialProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150.0,
-      height: 150.0,
+      width: 111.0,
+      height: 111.0,
       //color: Colors.red,
       child: RadialProgress(
         porcentaje: porcentaje,
