@@ -49,7 +49,7 @@ class _CircularProgressPageState extends State<CircularProgressPage> with Single
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
         backgroundColor: Colors.pink,
         onPressed: (){
           porcentaje = nuevoPorcentaje;

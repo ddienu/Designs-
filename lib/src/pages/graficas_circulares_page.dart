@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 
 class GraficasCircularesPage extends StatefulWidget {
-  const GraficasCircularesPage({Key? key}) : super(key: key);
+  const GraficasCircularesPage({Key? key, this.colorBoton = Colors.blue,}) : super(key: key);
+  
+  final Color colorBoton;
 
   @override
   State<GraficasCircularesPage> createState() => _GraficasCircularesPageState();
@@ -18,6 +20,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon( Icons.refresh),
+        backgroundColor: widget.colorBoton,
         onPressed: (){
           setState(() {
             porcentaje += 10;
@@ -32,7 +35,13 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           width: 300.0,
           height: 300.0,
           //color: Colors.red,
-          child: RadialProgress(porcentaje: porcentaje),
+          child: RadialProgress(
+            porcentaje: porcentaje,
+            colorPrimario: Colors.grey,
+            colorSecundario: Colors.purple,
+            grosorPrimario: 10.0,
+            grosorSecundario: 10.0,
+            ),
         )
         ),
     );

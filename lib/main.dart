@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Designs App',
-      home: GraficasCircularesPage(),
+      home: const GraficasCircularesPage( /*colorBoton: Colors.purple*/),
     );
   }
 }
