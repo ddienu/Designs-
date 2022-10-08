@@ -1,3 +1,4 @@
+import 'package:disenos_app/src/pages/slideshow_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:disenos_app/src/pages/graficas_circulares_page.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Designs App',
-      home: const GraficasCircularesPage( /*colorBoton: Colors.purple*/),
+      home: SlideShowPage(),
     );
   }
 }
