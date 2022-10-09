@@ -9,10 +9,61 @@ class SlideShowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _Slides(),
+        child: Column(
+          children: [
+            Expanded(
+              child: _Slides()
+              ),
+            _Dots(),
+          ],
+        )
       ),
     );
       
+  }
+}
+
+class _Dots extends StatelessWidget {
+  const _Dots({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 70,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        //color: Colors.red,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _Dot(),
+          _Dot(),
+          _Dot(),
+        ],
+      ),
+    );
+  }
+}
+
+class _Dot extends StatelessWidget {
+  const _Dot({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric( horizontal: 8.0),
+      height: 10,
+      width: 10,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        shape: BoxShape.circle
+      ),
+      
+
+    );
   }
 }
 
