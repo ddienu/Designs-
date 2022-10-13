@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:disenos_app/model/Slider_model.dart';
+//import 'package:disenos_app/model/Slider_model.dart';
 
 //import 'package:flutter_svg/svg.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -30,17 +30,25 @@ class Slideshow extends StatelessWidget {
   Widget build(BuildContext context){
       
   return ChangeNotifierProvider(
-    create: (_) => SliderModel(),
+    create: (_) => _SlideshowModel(),
     child: SafeArea(
       child: Center(
-            child: Column(
+            child: Builder(
+              builder: (BuildContext context) { 
+                Provider.of<_SlideshowModel>(context).bulletPrimario = bulletPrimario;
+                Provider.of<_SlideshowModel>(context).bulletSecundario = bulletSecundario;
+
+                return Column(
               verticalDirection: ( puntosArriba == false ) ? VerticalDirection.down : VerticalDirection.up,
               children: [
                 Expanded(
                   child: _Slides( slides)
                   ),
-                _Dots( totalSlides: slides.length, bulletPrimario: bulletPrimario, bulletSecundario: bulletSecundario, dotSize: dotSize,),
+                _Dots( totalSlides: slides.length, dotSize: dotSize,),
               ],
+            );
+               },
+
             )
           ),
     ),
@@ -51,13 +59,9 @@ class Slideshow extends StatelessWidget {
 class _Dots extends StatelessWidget {
 
   final int totalSlides;
-  final Color bulletPrimario;
-  final Color bulletSecundario;
   final double dotSize;
 
   const _Dots({required this.totalSlides,
-  required this.bulletPrimario,
-  required this.bulletSecundario,
   required this.dotSize
   });
 
@@ -73,8 +77,6 @@ class _Dots extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(totalSlides, (i) => _Dot( 
           index: i, 
-          bulletPrimario: bulletPrimario, 
-          bulletSecundario: bulletSecundario, 
           dotSize: dotSize,)
           ),
         // children: [
@@ -90,20 +92,18 @@ class _Dots extends StatelessWidget {
 class _Dot extends StatelessWidget {
 
   final int index;
-  final Color bulletPrimario;
-  final Color bulletSecundario;
   final double dotSize;
 
   const _Dot ( { required this.index,
-  required this.bulletPrimario,
-  required this.bulletSecundario,
   required this.dotSize,
   });
 
   @override
   Widget build(BuildContext context) {
 
-    final pageViewIndex = Provider.of<SliderModel>(context).currentPage;
+    //final pageViewIndex = Provider.of<_SlideshowModel>(context).currentPage;
+    final slideShowModel = Provider.of<_SlideshowModel>(context);
+   
 
     return AnimatedContainer(
       duration: Duration( milliseconds: 200),
@@ -111,9 +111,9 @@ class _Dot extends StatelessWidget {
       height: dotSize,
       width: dotSize,
       decoration: BoxDecoration(
-        color: ( pageViewIndex >= index - 0.5 && pageViewIndex <= index + 0.5) 
-          ? bulletSecundario
-          : bulletPrimario,
+        color: ( slideShowModel.currentPage >= index - 0.5 && slideShowModel.currentPage <= index + 0.5) 
+          ? slideShowModel.bulletSecundario
+          : slideShowModel.bulletPrimario,
         shape: BoxShape.circle
       ),
     );
@@ -137,7 +137,7 @@ class _SlidesState extends State<_Slides> {
   @override
   void initState() {
     pageViewController.addListener(() {
-    Provider.of<SliderModel>(context, listen: false).currentPage = pageViewController.page!;
+    Provider.of<_SlideshowModel>(context, listen: false).currentPage = pageViewController.page!;
      });
     super.initState();
   }
@@ -182,3 +182,32 @@ class _Slide extends StatelessWidget {
     );
   }
 }
+
+class _SlideshowModel with ChangeNotifier{
+
+  double _currentPage     = 0;
+  Color _bulletPrimario    = Colors.grey;
+  Color _bulletSecundario = Colors.blue;
+
+  double get currentPage => _currentPage;
+
+  set currentPage ( double currentPage){
+    _currentPage = currentPage;
+    notifyListeners();
+  }
+
+  Color get bulletPrimario => _bulletPrimario;
+
+  set bulletPrimario ( Color bulletPrimario){
+    _bulletPrimario = bulletPrimario;
+  }
+
+  Color get bulletSecundario => _bulletSecundario;
+
+  set bulletSecundario ( Color bulletSecundario){
+    _bulletSecundario = bulletSecundario;
+  }
+
+  
+}
+

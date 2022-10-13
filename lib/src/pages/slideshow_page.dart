@@ -13,8 +13,8 @@ class SlideshowPage extends StatelessWidget {
       body: Slideshow(
         dotSize: 8.0,
         bulletPrimario: Colors.grey,
-        bulletSecundario: Colors.purple,
-        puntosArriba: true,
+        bulletSecundario: Colors.pink,
+        puntosArriba: false,
         slides: [
         SvgPicture.asset('assets/svgs/slide-1.svg' ),
         SvgPicture.asset('assets/svgs/slide-2.svg' ),
