@@ -11,18 +11,22 @@ class Slideshow extends StatelessWidget {
   
   final List<Widget> slides;
   final bool puntosArriba;
-  //bulletPrimario is the color of the background dot
-  final Color bulletPrimario;
-  //bulletSecundario is the color of the dot.
-  final Color bulletSecundario;
-  final double dotSize;
+  //colorPrimario is the color of the background dot
+  final Color colorPrimario;
+  //colorSecundario is the color of the dot.
+  final Color colorSecundario;
+  //bulletPrimario is when the dot is selected.
+  final double bulletPrimario;
+  //bulletSecundario is when the dot is not selected or have the colorPrimario.
+  final double bulletSecundario;
 
   const Slideshow({
     required this.slides, 
-    this.puntosArriba = false, 
-    this.bulletPrimario = Colors.grey,
-    this.bulletSecundario = Colors.blue,
-    this.dotSize = 10.0
+    this.puntosArriba     = false, 
+    this.colorPrimario    = Colors.grey,
+    this.colorSecundario  = Colors.blue,
+    this.bulletPrimario   = 15.0,
+    this.bulletSecundario = 12.0,
     }
     );
 
@@ -35,7 +39,10 @@ class Slideshow extends StatelessWidget {
       child: Center(
             child: Builder(
               builder: (BuildContext context) { 
-                Provider.of<_SlideshowModel>(context).bulletPrimario = bulletPrimario;
+                Provider.of<_SlideshowModel>(context).colorPrimario    = colorPrimario;
+                Provider.of<_SlideshowModel>(context).colorSecundario  = colorSecundario;
+
+                Provider.of<_SlideshowModel>(context).bulletPrimario   = bulletPrimario;
                 Provider.of<_SlideshowModel>(context).bulletSecundario = bulletSecundario;
 
                 return Column(
@@ -44,7 +51,7 @@ class Slideshow extends StatelessWidget {
                 Expanded(
                   child: _Slides( slides)
                   ),
-                _Dots( totalSlides: slides.length, dotSize: dotSize,),
+                _Dots( totalSlides: slides.length,),
               ],
             );
                },
@@ -59,10 +66,8 @@ class Slideshow extends StatelessWidget {
 class _Dots extends StatelessWidget {
 
   final int totalSlides;
-  final double dotSize;
 
   const _Dots({required this.totalSlides,
-  required this.dotSize
   });
 
   @override
@@ -76,8 +81,7 @@ class _Dots extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(totalSlides, (i) => _Dot( 
-          index: i, 
-          dotSize: dotSize,)
+          index: i)
           ),
         // children: [
         //   _Dot(index: 0),
@@ -92,28 +96,35 @@ class _Dots extends StatelessWidget {
 class _Dot extends StatelessWidget {
 
   final int index;
-  final double dotSize;
 
   const _Dot ( { required this.index,
-  required this.dotSize,
   });
 
   @override
   Widget build(BuildContext context) {
 
+
     //final pageViewIndex = Provider.of<_SlideshowModel>(context).currentPage;
     final slideShowModel = Provider.of<_SlideshowModel>(context);
+
+    final double size;
+    final Color color;
    
+    if ( slideShowModel.currentPage >= index - 0.5 && slideShowModel.currentPage <= index + 0.5){
+      size = slideShowModel.bulletPrimario;
+      color  = slideShowModel.colorSecundario;
+    }else{
+      size = slideShowModel.bulletSecundario;
+      color  = slideShowModel.colorPrimario;
+    }
 
     return AnimatedContainer(
       duration: Duration( milliseconds: 200),
       margin: EdgeInsets.symmetric( horizontal: 8.0),
-      height: dotSize,
-      width: dotSize,
+      height: size,
+      width: size,
       decoration: BoxDecoration(
-        color: ( slideShowModel.currentPage >= index - 0.5 && slideShowModel.currentPage <= index + 0.5) 
-          ? slideShowModel.bulletSecundario
-          : slideShowModel.bulletPrimario,
+        color: color,
         shape: BoxShape.circle
       ),
     );
@@ -185,9 +196,11 @@ class _Slide extends StatelessWidget {
 
 class _SlideshowModel with ChangeNotifier{
 
-  double _currentPage     = 0;
-  Color _bulletPrimario    = Colors.grey;
-  Color _bulletSecundario = Colors.blue;
+  double _currentPage      = 0;
+  Color _colorPrimario     = Colors.grey;
+  Color _colorSecundario   = Colors.blue;
+  double _bulletPrimario   = 15.0;
+  double _bulletSecundario = 12.0;
 
   double get currentPage => _currentPage;
 
@@ -196,16 +209,30 @@ class _SlideshowModel with ChangeNotifier{
     notifyListeners();
   }
 
-  Color get bulletPrimario => _bulletPrimario;
+  Color get colorPrimario => _colorPrimario;
 
-  set bulletPrimario ( Color bulletPrimario){
-    _bulletPrimario = bulletPrimario;
+  set colorPrimario ( Color colorPrimario){
+    _colorPrimario = colorPrimario;
   }
 
-  Color get bulletSecundario => _bulletSecundario;
+  Color get colorSecundario => _colorSecundario;
 
-  set bulletSecundario ( Color bulletSecundario){
+  set colorSecundario ( Color colorSecundario){
+    _colorSecundario = colorSecundario;
+  }
+
+  double get bulletPrimario => _bulletPrimario;
+
+  set bulletPrimario ( double bulletPrimario ){
+    _bulletPrimario = bulletPrimario;
+    //notifyListeners();
+  }
+
+  double get bulletSecundario => _bulletSecundario;
+
+  set bulletSecundario ( double bulletSecundario){
     _bulletSecundario = bulletSecundario;
+    //notifyListeners();
   }
 
   
