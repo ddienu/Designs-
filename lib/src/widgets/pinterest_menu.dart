@@ -29,11 +29,55 @@ class PinterestMenu extends StatelessWidget {
 
     ];
 
-    return Container(
-      child: Center(
-        child: Text('Hello world'),
+    return Center(
+      child: Container(
+        child: _MenuItems( menuItems: items),
+        width: 250.0,
+        height: 60.0,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(50.0),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 10.0,
+              spreadRadius: -5,
+            )
+          ]
+        ),
       ),
     );
-    
+  }
+}
+
+class _MenuItems extends StatelessWidget {
+
+  final List<PinterestButton> menuItems;
+
+  const _MenuItems({required this.menuItems});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: List.generate(menuItems.length, (index) => _PinterestMenuButton( index: index, item: menuItems[index]))
+    );
+  }
+}
+
+class _PinterestMenuButton extends StatelessWidget {
+
+  final int index;
+  final PinterestButton item;
+
+  const _PinterestMenuButton({
+    required this.index, 
+    required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Icon( item.icon ),
+    );
   }
 }
