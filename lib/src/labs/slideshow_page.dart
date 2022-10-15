@@ -1,5 +1,7 @@
-import 'package:disenos_app/model/Slider_model.dart';
 import 'package:flutter/material.dart';
+
+
+import 'package:disenos_app/src/models/Slider_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
