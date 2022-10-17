@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 
@@ -30,13 +31,11 @@ class PinterestMenu extends StatelessWidget {
 
     ];
 
-    return Center(
-      child: ChangeNotifierProvider(
-        create: (_) => _MenuModel(),
-        child: _PinterestMenuBackground(
-          child: _MenuItems( menuItems: items)
-          ),
-      ),
+    return ChangeNotifierProvider(
+      create: (_) => _MenuModel(),
+      child: _PinterestMenuBackground(
+        child: _MenuItems( menuItems: items)
+        ),
     );
   }
 }
