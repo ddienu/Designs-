@@ -25,14 +25,49 @@ class PinterestPage extends StatelessWidget {
   }
 }
 
-class PinterestGrid extends StatelessWidget {
+class PinterestGrid extends StatefulWidget {
+
+  @override
+  State<PinterestGrid> createState() => _PinterestGridState();
+}
+
+class _PinterestGridState extends State<PinterestGrid> {
 
   final List<int> items = List.generate(200, (i) => i);
- 
+
+  ScrollController controller = ScrollController();
+
+  double scrollAnterior = 0;
+
+  @override
+  void initState() {
+    
+    controller.addListener(() {
+      
+      if ( controller.offset > scrollAnterior){
+        print('Ocultar menu');
+      }else{
+        print('Mostrar menu');
+      }
+
+      scrollAnterior = controller.offset;
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    
+    controller.dispose();
+    
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
  
     return GridView.custom(
+      controller: controller,
       gridDelegate: SliverQuiltedGridDelegate(
         crossAxisCount: 4,
         mainAxisSpacing: 4,
