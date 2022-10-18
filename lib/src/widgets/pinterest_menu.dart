@@ -16,7 +16,12 @@ class PinterestButton {
 }
 
 class PinterestMenu extends StatelessWidget {
-  const PinterestMenu({Key? key}) : super(key: key);
+  
+  late final bool mostrar;
+
+  PinterestMenu(
+    {this.mostrar = true} 
+    );
   
 
   @override
@@ -33,9 +38,13 @@ class PinterestMenu extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (_) => _MenuModel(),
-      child: _PinterestMenuBackground(
-        child: _MenuItems( menuItems: items)
-        ),
+      child: AnimatedOpacity(
+        duration: Duration( milliseconds: 250),
+        opacity: (mostrar) ? 1 : 0,
+        child: _PinterestMenuBackground(
+          child: _MenuItems( menuItems: items)
+          ),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:disenos_app/src/widgets/pinterest_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 
 class PinterestPage extends StatelessWidget {
@@ -9,19 +10,37 @@ class PinterestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          PinterestGrid(),
-          Positioned(
-            child: PinterestMenu(),
-            bottom: 20.0,
-            ),
-        ],
+      body: ChangeNotifierProvider(
+        create: (_) => _MostrarMenuModel(),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            PinterestGrid(),
+            _PinterestMenuLocation(),
+          ],
+        ),
       )
       //PinterestMenu(),
     );
+  }
+}
+
+class _PinterestMenuLocation extends StatelessWidget {
+  const _PinterestMenuLocation({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+   final mostrar = Provider.of<_MostrarMenuModel>(context).mostrar;
+
+    return Positioned(
+      child: PinterestMenu(mostrar: mostrar,),
+      bottom: 20.0,
+      );
   }
 }
 
@@ -45,9 +64,9 @@ class _PinterestGridState extends State<PinterestGrid> {
     controller.addListener(() {
       
       if ( controller.offset > scrollAnterior){
-        print('Ocultar menu');
+        Provider.of<_MostrarMenuModel>(context, listen: false).mostrar = false;
       }else{
-        print('Mostrar menu');
+        Provider.of<_MostrarMenuModel>(context, listen: false).mostrar = true;
       }
 
       scrollAnterior = controller.offset;
@@ -109,6 +128,18 @@ class _PinterestItem extends StatelessWidget {
       ),
     );
     
+  }
+}
+
+class _MostrarMenuModel with ChangeNotifier{
+
+  bool _mostrar = true;
+
+  bool get mostrar => _mostrar;
+
+  set mostrar ( bool mostrar){
+    _mostrar = mostrar;
+    notifyListeners();
   }
 }
 
