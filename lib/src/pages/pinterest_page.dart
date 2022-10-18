@@ -38,7 +38,12 @@ class _PinterestMenuLocation extends StatelessWidget {
    final mostrar = Provider.of<_MostrarMenuModel>(context).mostrar;
 
     return Positioned(
-      child: PinterestMenu(mostrar: mostrar,),
+      child: PinterestMenu(
+        mostrar: mostrar, 
+        backgroundColor: Colors.black,
+        activeColor: Colors.blueGrey, 
+        inactiveColor: Colors.blue
+        ),
       bottom: 20.0,
       );
   }
