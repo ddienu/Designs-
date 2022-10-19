@@ -25,25 +25,30 @@ class PinterestMenu extends StatelessWidget {
 
   late final Color inactiveColor;
 
+  final List<PinterestButton> items;
+
   PinterestMenu(
-    {this.mostrar = true,
+    {
+    this.mostrar         = true,
     this.backgroundColor = Colors.white,
-    this.activeColor = Colors.black,
-    this.inactiveColor = Colors.blueGrey} 
+    this.activeColor     = Colors.black,
+    this.inactiveColor   = Colors.blueGrey,
+    required this.items
+    } 
     );
   
 
   @override
   Widget build(BuildContext context) {
 
-    final List<PinterestButton> items = [
+    // final List<PinterestButton> items = [
 
-      PinterestButton(icon: Icons.pie_chart, onPressed: (){ print({'Icon pie_chart'});}),
-      PinterestButton(icon: Icons.search, onPressed: (){ print({'Icon search'});}),
-      PinterestButton(icon: Icons.notifications, onPressed: (){ print({'Icon notifications'});}),
-      PinterestButton(icon: Icons.supervised_user_circle, onPressed: (){ print({'Icon supervised'});}),
+    //   PinterestButton(icon: Icons.pie_chart, onPressed: (){ print({'Icon pie_chart'});}),
+    //   PinterestButton(icon: Icons.search, onPressed: (){ print({'Icon search'});}),
+    //   PinterestButton(icon: Icons.notifications, onPressed: (){ print({'Icon notifications'});}),
+    //   PinterestButton(icon: Icons.supervised_user_circle, onPressed: (){ print({'Icon supervised'});}),
 
-    ];
+    // ];
 
     return ChangeNotifierProvider(
       create: (_) => _MenuModel(),
@@ -151,10 +156,10 @@ class _PinterestMenuButton extends StatelessWidget {
 
 class _MenuModel with ChangeNotifier {
 
-  int _itemSeleccionado = 0;
+  int _itemSeleccionado  = 0;
   Color _backgroundColor = Colors.white;
-  Color _activeColor = Colors.black;
-  Color _inactiveColor = Colors.blueGrey;
+  Color _activeColor     = Colors.black;
+  Color _inactiveColor   = Colors.blueGrey;
 
   int get itemSeleccionado => _itemSeleccionado;
 
