@@ -1,3 +1,4 @@
+import 'package:disenos_app/src/widgets/headers_widget.dart';
 import 'package:flutter/material.dart';
 
 
@@ -9,10 +10,7 @@ class EmergencyPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Center(
-        child: Text('Hola Mundo')
-      ),
+      body: IconHeader(),
     );
-    
+    }
   }
-}
