@@ -1,6 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class HeaderCuadrado extends StatelessWidget {
@@ -397,6 +397,48 @@ class IconHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+  return Stack(
+    children: [
+      _IconHeaderBackground(),
+
+      Positioned(
+        top: -70.0,
+        left: -80.0,
+        child: FaIcon ( FontAwesomeIcons.plus, size: 250.0, color: Colors.white12 )
+        ),
+
+      Column(
+        children: [
+          SizedBox( width: double.infinity, height: 60.0,),
+          Text('Haz solicitado', style: TextStyle(color: Colors.white54,)),
+          SizedBox(height: 25.0,),
+          Text('Asistencia Médica', style: TextStyle(color: Colors.white70,fontSize: 20.0, fontWeight: FontWeight.bold)),
+          SizedBox( height: 30.0,),          
+          FaIcon( FontAwesomeIcons.plus, size: 70.0, color: Colors.white,)
+        ],
+      ),
+
+      Positioned(
+        top: 20.0,
+        left: 290.0,
+        child: IconButton(
+          focusColor: Colors.grey,
+          onPressed: (() => {print('Icon Pressed')}),
+          icon: FaIcon( FontAwesomeIcons.ellipsisVertical, color: Colors.white )
+          )
+      )      
+    ],
+  );    
+  }
+}
+
+class _IconHeaderBackground extends StatelessWidget {
+  const _IconHeaderBackground({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topCenter,
       width: double.infinity,
@@ -415,6 +457,5 @@ class IconHeader extends StatelessWidget {
           )
       ),
     );
-    
   }
 }
