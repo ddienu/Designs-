@@ -392,35 +392,52 @@ class _HeaderWavesGradientPainter extends CustomPainter {
   }
 
 class IconHeader extends StatelessWidget {
-  const IconHeader({Key? key}) : super(key: key);
+
+  final IconData icon;
+  final String titulo;
+  final String subtitulo;
+  final Color color1;
+  final Color color2;
+
+  const IconHeader({
+    required this.icon, 
+    required this.titulo, 
+    required this.subtitulo, 
+    this.color1 = const Color(0xff526BF6),
+    this.color2 = const Color(0xff67ACF2),
+
+    });
 
   @override
   Widget build(BuildContext context) {
 
   return Stack(
     children: [
-      _IconHeaderBackground(),
+      _IconHeaderBackground(
+        color1: color1,
+        color2: color2,
+      ),
 
       Positioned(
         top: -70.0,
         left: -80.0,
-        child: FaIcon ( FontAwesomeIcons.plus, size: 250.0, color: Colors.white12 )
+        child: FaIcon ( icon , size: 250.0, color: Colors.white12 )
         ),
 
       Column(
         children: [
           SizedBox( width: double.infinity, height: 60.0,),
-          Text('Haz solicitado', style: TextStyle(color: Colors.white54,)),
+          Text(titulo, style: TextStyle(color: Colors.white54,)),
           SizedBox(height: 25.0,),
-          Text('Asistencia Médica', style: TextStyle(color: Colors.white70,fontSize: 20.0, fontWeight: FontWeight.bold)),
+          Text(subtitulo, style: TextStyle(color: Colors.white70,fontSize: 20.0, fontWeight: FontWeight.bold)),
           SizedBox( height: 30.0,),          
-          FaIcon( FontAwesomeIcons.plus, size: 70.0, color: Colors.white,)
+          FaIcon( icon, size: 70.0, color: Colors.white,)
         ],
       ),
 
       Positioned(
         top: 20.0,
-        left: 290.0,
+        left: 340.0,
         child: IconButton(
           focusColor: Colors.grey,
           onPressed: (() => {print('Icon Pressed')}),
@@ -433,9 +450,14 @@ class IconHeader extends StatelessWidget {
 }
 
 class _IconHeaderBackground extends StatelessWidget {
+
+  final Color color1;
+  final Color color2;
+
   const _IconHeaderBackground({
-    Key? key,
-  }) : super(key: key);
+    this.color1 = const Color(0xff526BF6),
+    this.color2 = const Color(0xff67ACF2),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -450,9 +472,8 @@ class _IconHeaderBackground extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xff526BF6),
-            Color(0xff67ACF2),
-            
+            color1,
+            color2,
           ] 
           )
       ),
