@@ -440,7 +440,6 @@ class IconHeader extends StatelessWidget {
         padding: EdgeInsets.only(right: 20.0),
         alignment: Alignment.topRight,
         child: IconButton(
-          //alignment: Alignment.topRight,
           focusColor: Colors.grey,
           onPressed: (() => {print('Icon Pressed')}),
           icon: FaIcon( FontAwesomeIcons.ellipsisVertical, color: Colors.white )
