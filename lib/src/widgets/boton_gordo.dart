@@ -3,16 +3,40 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class BotonGordo extends StatelessWidget {
-  const BotonGordo({Key? key}) : super(key: key);
+
+  final IconData icono;
+  final IconData iconoBoton;
+  final String titulo;
+  final Color color1;
+  final Color color2;
+  final Function() onPressed;
+
+  const BotonGordo({
+    required this.icono, 
+    required this.titulo, 
+    this.color1 = const Color(0xFF6989F5), 
+    this.color2 = const Color(0xFF906EF5), 
+    required this.onPressed,
+    this.iconoBoton = FontAwesomeIcons.chevronRight,
+    });
 
   @override
   Widget build(BuildContext context) {
 
     return Stack(
       children: [
-        _BotonGordoBackground(),
+        _BotonGordoBackground(
+          icono: this.icono,
+          color1: color1,
+          color2: color2,
+        ),
 
-        _BotonGordoInformation()
+        _BotonGordoInformation(
+          icono: this.icono,
+          iconoBoton: this.iconoBoton,
+          titulo: this.titulo,
+          onPressed: this.onPressed,
+        )
       ],
     );
     
@@ -20,9 +44,18 @@ class BotonGordo extends StatelessWidget {
 }
 
 class _BotonGordoInformation extends StatelessWidget {
+
+  final IconData icono;
+  final IconData iconoBoton;
+  final String titulo;
+  final Function() onPressed;
+  
   const _BotonGordoInformation({
-    Key? key,
-  }) : super(key: key);
+    required this.icono, 
+    required this.titulo, 
+    required this.onPressed,
+    this.iconoBoton = FontAwesomeIcons.chevronRight,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +63,12 @@ class _BotonGordoInformation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: 125.0, width: 40.0,),
-        FaIcon( FontAwesomeIcons.carBurst, color: Colors.white, size: 35.0),
+        FaIcon( this.icono, color: Colors.white, size: 35.0),
         SizedBox(width: 40.0),
-        Expanded(child: Text('Motor Accident', style: TextStyle( color: Colors.white70, fontSize: 16.0),)),
+        Expanded(child: Text(this.titulo, style: TextStyle( color: Colors.white70, fontSize: 16.0),)),
         IconButton(
-          onPressed: (){},
-          icon: FaIcon ( FontAwesomeIcons.chevronRight, color: Colors.white, size: 18)),
+          onPressed: this.onPressed,
+          icon: FaIcon ( this.iconoBoton, color: Colors.white, size: 18)),
         SizedBox( width: 40.0),
       ],
     );
@@ -43,9 +76,16 @@ class _BotonGordoInformation extends StatelessWidget {
 }
 
 class _BotonGordoBackground extends StatelessWidget {
+
+  final IconData icono;
+  final Color color1;
+  final Color color2;
+  
   const _BotonGordoBackground({
-    Key? key,
-  }) : super(key: key);
+    required this.icono, 
+    this.color1 = const Color(0xFF6989F5), 
+    this.color2 = const Color(0xFF906EF5), 
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +97,7 @@ class _BotonGordoBackground extends StatelessWidget {
             Positioned(
             right: -20,
             top: -20,
-            child: FaIcon( FontAwesomeIcons.carBurst, color: Colors.white30, size: 150.0)),
+            child: FaIcon( this.icono, color: Colors.white30, size: 150.0)),
           ]
         ),
       ),
@@ -69,8 +109,8 @@ class _BotonGordoBackground extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
         gradient: LinearGradient(
           colors: <Color>[
-            Color(0xFF6989F5),
-            Color(0xFF906EF5),
+            color1,
+            color2,
           ]
           ),
         boxShadow: <BoxShadow>[

@@ -13,7 +13,14 @@ class EmergencyPage extends StatelessWidget {
 
     return Scaffold(
       body: Center(
-        child: BotonGordo(),
+        child: BotonGordo(
+          icono: FontAwesomeIcons.plus,
+          iconoBoton: FontAwesomeIcons.chevronRight,
+          titulo: 'Medical Emergency',
+          color1: Colors.blueAccent,
+          color2: Colors.blue,
+          onPressed: (){},
+        ),
       )
           );
     }
