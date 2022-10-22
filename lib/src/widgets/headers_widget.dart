@@ -439,10 +439,10 @@ class IconHeader extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.only(right: 20.0),
         alignment: Alignment.topRight,
-        child: IconButton(
-          focusColor: Colors.grey,
+        child: RawMaterialButton(
+          shape: CircleBorder(),
+          child: FaIcon( FontAwesomeIcons.ellipsisVertical, color: Colors.white ),
           onPressed: (() => {print('Icon Pressed')}),
-          icon: FaIcon( FontAwesomeIcons.ellipsisVertical, color: Colors.white )
           ),
       )      
     ],
