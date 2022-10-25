@@ -8,8 +8,47 @@ class SliverListPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: _ListaTareas(),
+      body: _MainScroll(),
+      //body: _Titulo(),
+      //body: _ListaTareas(),
     );
+  }
+}
+
+class _MainScroll extends StatelessWidget {
+  const _MainScroll({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+   final items = [
+    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66) ),
+    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A) ),
+    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5) ),
+    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF) ),
+    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66) ),
+    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A) ),
+    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5) ),
+    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF) ),
+  ];
+
+    return CustomScrollView(
+      slivers: [
+        
+        SliverAppBar(
+          title: _Titulo(),
+          backgroundColor: Colors.white10,
+          toolbarHeight: 140.0,
+          elevation: 0.0,
+        ),
+        
+        SliverList(
+          delegate: SliverChildListDelegate( items )
+          )
+
+      ],
+    );
+    
   }
 }
 
