@@ -35,20 +35,71 @@ class _MainScroll extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         
-        SliverAppBar(
-          title: _Titulo(),
-          backgroundColor: Colors.white10,
-          toolbarHeight: 140.0,
-          elevation: 0.0,
-        ),
+        // SliverAppBar(
+        //   title: _Titulo(),
+        //   backgroundColor: Colors.white,
+        //   toolbarHeight: 140.0,
+        //   elevation: 0.0,
+        //   floating: true,
+        // ),
+        SliverPersistentHeader(
+          floating: true,
+          delegate: _SliverCustomHeaderDelegate(
+            minHeight: 100.0,
+            maxHeight: 120.0,
+            child: Container(
+              alignment: Alignment.centerLeft,
+              color: Colors.white,
+              child: _Titulo()),
+            
+          ),
+          ),
         
         SliverList(
-          delegate: SliverChildListDelegate( items )
+          delegate: SliverChildListDelegate( 
+            [
+              ...items,
+
+              SizedBox( height: 100.0,)
+              ] 
+              )
           )
 
       ],
     );
     
+  }
+}
+
+class _SliverCustomHeaderDelegate extends SliverPersistentHeaderDelegate {
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  _SliverCustomHeaderDelegate({
+    required this.minHeight, 
+    required this.maxHeight,
+    required this.child
+    });
+  
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(
+      child: child
+    );
+  }
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  double get minExtent => minHeight;
+  @override
+  bool shouldRebuild(covariant _SliverCustomHeaderDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+           minHeight != oldDelegate.minHeight ||
+           child != oldDelegate.child;
   }
 }
 
@@ -59,6 +110,7 @@ class _Titulo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+
         Container(
           margin: EdgeInsets.only(left: 20.0),
           alignment: Alignment.bottomLeft,
@@ -99,6 +151,7 @@ class _ListaTareas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) { 
         return items[index];
