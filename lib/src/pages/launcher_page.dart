@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; 
 
+import 'package:disenos_app/src/routes/routes.dart';
 
 class LauncherPage extends StatelessWidget {
   const LauncherPage({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class LauncherPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Diseños Flutter App'),
         centerTitle: true,
+        elevation: 0,
       ),
       drawer: _MenuPrincipal(),
       body: _ListaOpciones(),
@@ -77,19 +81,19 @@ class _ListaOpciones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+
     return ListView.separated(
       separatorBuilder: ((context, index) => Divider(
-        height: 20.0,
         color: Colors.blueAccent,
       )), 
-      itemCount: 20,
+      itemCount: pageRoutes.length,
       itemBuilder: (context, index) => ListTile(
-          leading: FaIcon(FontAwesomeIcons.slideshare, color: Colors.blue,),
-          title: Text('Hola Mundo'),
+          leading: FaIcon(pageRoutes[index].icon, color: Colors.blue,),
+          title: Text(pageRoutes[index].title),
           trailing: Icon( Icons.chevron_right),
           onTap: (){
-
+            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => pageRoutes[index].page)
+            );
           },
       ),
       controller: ScrollController(),
