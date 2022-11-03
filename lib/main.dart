@@ -1,6 +1,8 @@
+import 'package:disenos_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:disenos_app/src/pages/launcher_page.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:disenos_app/src/pages/sliver_list_page.dart';
 //import 'package:disenos_app/src/pages/emergency_page.dart';
@@ -11,7 +13,11 @@ import 'package:disenos_app/src/pages/launcher_page.dart';
 //import 'package:disenos_app/src/pages/Slideshow_page.dart';
 //import 'package:disenos_app/src/pages/pinterest_page.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(
+  ChangeNotifierProvider(
+    create: ((context) => ThemeChanger()),
+    child: const MyApp())
+  );
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

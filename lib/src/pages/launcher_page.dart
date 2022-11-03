@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; 
+import 'package:provider/provider.dart';
 
 import 'package:disenos_app/src/routes/routes.dart';
+import 'package:disenos_app/src/theme/theme.dart';
 
 class LauncherPage extends StatelessWidget {
   const LauncherPage({Key? key}) : super(key: key);
@@ -28,6 +30,8 @@ class _MenuPrincipal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
     
     return Drawer(
       child: Container(
@@ -52,21 +56,17 @@ class _MenuPrincipal extends StatelessWidget {
               leading: FaIcon( FontAwesomeIcons.solidLightbulb, color: Colors.blue,),
               title: Text('Dark Mode'),
               trailing: Switch(
-                value: true, 
-                onChanged: ( value ){
-
-                },
+                value: appTheme.darkMode, 
+                onChanged: ( value ) => appTheme.darkMode = value            
                 ),
             ),
 
             ListTile(
               leading: Icon( Icons.add_to_home_screen, color: Colors.blue),
-              title: Text('Custom Mode'),
+              title: Text('Custom Theme'),
               trailing: Switch(
-                value: true, 
-                onChanged: ( value ){
-
-                },
+                value: appTheme.customTheme, 
+                onChanged: ( value ) => appTheme.customTheme = value
                 ),
             )
           ],
