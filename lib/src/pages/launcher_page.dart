@@ -32,6 +32,9 @@ class _MenuPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context);
+
+    final accentColor = appTheme.currentTheme.colorScheme.secondary;
+
     
     return Drawer(
       child: Container(
@@ -43,7 +46,7 @@ class _MenuPrincipal extends StatelessWidget {
               width: double.infinity,
               child: CircleAvatar(
                 radius: 100.0,
-                backgroundColor: Colors.lightBlueAccent,
+                backgroundColor: appTheme.currentTheme.colorScheme.secondary,
                   child: Text('D.N', style: TextStyle( fontSize: 50.0, color: Colors.white),),
               ),
             ),
@@ -53,7 +56,7 @@ class _MenuPrincipal extends StatelessWidget {
               ),
 
             ListTile(
-              leading: FaIcon( FontAwesomeIcons.solidLightbulb, color: Colors.blue,),
+              leading: FaIcon( FontAwesomeIcons.solidLightbulb, color: accentColor,),
               title: Text('Dark Mode'),
               trailing: Switch(
                 value: appTheme.darkMode, 
@@ -62,7 +65,7 @@ class _MenuPrincipal extends StatelessWidget {
             ),
 
             ListTile(
-              leading: Icon( Icons.add_to_home_screen, color: Colors.blue),
+              leading: Icon( Icons.add_to_home_screen, color: accentColor ),
               title: Text('Custom Theme'),
               trailing: Switch(
                 value: appTheme.customTheme, 
@@ -82,15 +85,19 @@ class _ListaOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final appTheme = Provider.of<ThemeChanger>(context);
+    
+    final accentColor = appTheme.currentTheme.colorScheme.secondary;
+
     return ListView.separated(
       separatorBuilder: ((context, index) => Divider(
-        color: Colors.blueAccent,
+        color: accentColor,
       )), 
       itemCount: pageRoutes.length,
       itemBuilder: (context, index) => ListTile(
-          leading: FaIcon(pageRoutes[index].icon, color: Colors.blue,),
+          leading: FaIcon(pageRoutes[index].icon, color: accentColor,),
           title: Text(pageRoutes[index].title),
-          trailing: Icon( Icons.chevron_right),
+          trailing: Icon( Icons.chevron_right, color: accentColor,),
           onTap: (){
             Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => pageRoutes[index].page)
             );
