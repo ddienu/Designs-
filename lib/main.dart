@@ -15,7 +15,8 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(
   ChangeNotifierProvider(
-    create: ((context) => ThemeChanger()),
+    create: ((context) => ThemeChanger( 2 )
+    ),
     child: const MyApp())
   );
 
@@ -24,7 +25,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
     return MaterialApp(
+      theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Designs App',
       home: LauncherPage(),
