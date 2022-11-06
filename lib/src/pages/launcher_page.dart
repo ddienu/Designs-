@@ -59,6 +59,7 @@ class _MenuPrincipal extends StatelessWidget {
               leading: FaIcon( FontAwesomeIcons.solidLightbulb, color: accentColor,),
               title: Text('Dark Mode'),
               trailing: Switch(
+                activeColor: accentColor,
                 value: appTheme.darkMode, 
                 onChanged: ( value ) => appTheme.darkMode = value            
                 ),

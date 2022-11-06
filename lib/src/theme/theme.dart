@@ -22,7 +22,14 @@ class ThemeChanger extends ChangeNotifier {
       case 2: //Dark theme
         _darkMode     = true;
         _customTheme  = false;
-        _currentTheme = ThemeData.dark();
+        _currentTheme = ThemeData.dark().copyWith(
+          appBarTheme: AppBarTheme(
+            color: Color(0XFF313130)
+          ),
+          colorScheme: ColorScheme.dark(
+            secondary: Colors.pink,
+          )
+        );
 
         break;
 
@@ -49,7 +56,14 @@ class ThemeChanger extends ChangeNotifier {
     _darkMode = value;
 
     if( value ){
-      _currentTheme = ThemeData.dark();
+      _currentTheme = ThemeData.dark().copyWith(
+        appBarTheme: AppBarTheme(
+          color: Color(0XFF313130)
+        ),
+          colorScheme: ColorScheme.dark(
+            secondary: Colors.pink,
+          )
+        );
     }else{
       _currentTheme = ThemeData.light();
     }
@@ -61,7 +75,23 @@ class ThemeChanger extends ChangeNotifier {
     _customTheme = value;
 
     if( value ){
-      _currentTheme = ThemeData.light();
+      _currentTheme = ThemeData.light().copyWith(
+        drawerTheme: DrawerThemeData(
+          backgroundColor: Color(0XFF16202B)
+        ),
+        appBarTheme: AppBarTheme(
+          color: Color(0XFF16202B)
+        ),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(
+            color: Colors.white
+          )
+        ),
+        scaffoldBackgroundColor: Color(0XFF16202B),
+        colorScheme: ColorScheme.light(
+          secondary: Color(0xFF48A0EB),
+        )
+      );
     }else{
       _currentTheme = ThemeData.light();
     }

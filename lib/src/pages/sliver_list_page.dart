@@ -96,7 +96,7 @@ class _MainScroll extends StatelessWidget {
             maxHeight: 120.0,
             child: Container(
               alignment: Alignment.centerLeft,
-              color: ( appTheme.darkMode ) ? appTheme.currentTheme.scaffoldBackgroundColor : Colors.white,
+              color: appTheme.currentTheme.scaffoldBackgroundColor,
               child: _Titulo()),
             
           ),
@@ -165,7 +165,7 @@ class _Titulo extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: Text('New', 
             style: TextStyle(
-              color: ( appTheme.darkMode )?Colors.grey : Color(0xFF532128), 
+              color: ( appTheme.darkMode )? Colors.grey : Color(0xFF532128), 
               fontSize: 30.0 ),
           ),
         ),
