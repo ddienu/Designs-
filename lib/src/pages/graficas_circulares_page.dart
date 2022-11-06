@@ -1,5 +1,7 @@
+import 'package:disenos_app/src/theme/theme.dart';
 import 'package:disenos_app/src/widgets/radial_progress.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class GraficasCircularesPage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
           });
         }
         ),
-      body: Column(
+      body: /*Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Stack(
@@ -54,14 +56,11 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
                   CustomRadialProgress(porcentaje: porcentaje, color: Colors.red)
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50, top: 47),
-                child: Row(
+             Row(
                   children: [
                     CustomRadialProgress(porcentaje: porcentaje, color: Colors.yellow)
                   ],
                 ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 160, top: 47),
                 child: Row(
@@ -74,27 +73,27 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
             
           )
         ],
-      )
-      // Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
+      )*/
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
 
-      //     Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //       children: [
-      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.black),
-      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.purpleAccent),
-      //       ],
-      //     ),
-      //     Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //       children: [
-      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.yellow),
-      //         CustomRadialProgress(porcentaje: porcentaje, color: Colors.green),
-      //       ],
-      //     ),
-      //   ],
-      // )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomRadialProgress(porcentaje: porcentaje, color: Colors.black),
+              CustomRadialProgress(porcentaje: porcentaje * 1.25, color: Colors.purpleAccent),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomRadialProgress(porcentaje: porcentaje * 1.5, color: Colors.yellow),
+              CustomRadialProgress(porcentaje: porcentaje * 2, color: Colors.green),
+            ],
+          ),
+        ],
+      )
     );
   }
 }
@@ -112,13 +111,15 @@ class CustomRadialProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     return Container(
       width: 111.0,
       height: 111.0,
       //color: Colors.red,
       child: RadialProgress(
         porcentaje: porcentaje,
-        colorPrimario: Colors.grey,
+        colorPrimario: appTheme.textTheme.bodyText1!.color ?? Colors.grey,
         colorSecundario: color,
         grosorPrimario: 8.0,
         grosorSecundario: 10.0,
