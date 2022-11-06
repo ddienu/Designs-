@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:disenos_app/src/theme/theme.dart';
+
 
 class SliverListPage extends StatelessWidget {
   const SliverListPage({Key? key}) : super(key: key);
@@ -28,6 +32,7 @@ class _ButtonNewList extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
 
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Positioned(
       right: 0,
       bottom: 0,
@@ -39,11 +44,11 @@ class _ButtonNewList extends StatelessWidget {
         ),
         height: 90.0,
         minWidth: size.width * 0.9,
-        color: Color(0xFFED6762),
+        color: ( appTheme.darkMode) ? appTheme.currentTheme.colorScheme.secondary : Color(0xFFED6762),
         onPressed: (){},
         child: Text('CREATE NEW LIST', 
           style: TextStyle( 
-            color: Colors.white, 
+            color: appTheme.currentTheme.scaffoldBackgroundColor, 
             fontWeight: FontWeight.bold, 
             fontSize: 15.0, 
             letterSpacing: 3.0
@@ -61,15 +66,17 @@ class _MainScroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final appTheme = Provider.of<ThemeChanger>(context);
+
    final items = [
-    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66) ),
-    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A) ),
-    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5) ),
-    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF) ),
-    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66) ),
-    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A) ),
-    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5) ),
-    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF) ),
+    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66), colorDark: Color(0xFFBB86F8) ),
+    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A), colorDark: Color(0xFF3700B3) ),
+    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5), colorDark: Color(0xFF03DAC6) ),
+    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF), colorDark: Color(0xFFBB86F8) ),
+    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66), colorDark: Color(0xFF3700B3) ),
+    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A), colorDark: Color(0xFF03DAC6) ),
+    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5), colorDark: Color(0xFFBB86F8) ),
+    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF), colorDark: Color(0xFF3700B3) ),
   ];
 
     return CustomScrollView(
@@ -89,7 +96,7 @@ class _MainScroll extends StatelessWidget {
             maxHeight: 120.0,
             child: Container(
               alignment: Alignment.centerLeft,
-              color: Colors.white,
+              color: ( appTheme.darkMode ) ? appTheme.currentTheme.scaffoldBackgroundColor : Colors.white,
               child: _Titulo()),
             
           ),
@@ -148,13 +155,18 @@ class _Titulo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Column(
       children: [
 
         Container(
           margin: EdgeInsets.only(left: 20.0),
           alignment: Alignment.bottomLeft,
-          child: Text('New', style: TextStyle(color: Color(0xFF532128), fontSize: 30.0 ),
+          child: Text('New', 
+            style: TextStyle(
+              color: ( appTheme.darkMode )?Colors.grey : Color(0xFF532128), 
+              fontSize: 30.0 ),
           ),
         ),
 
@@ -178,14 +190,14 @@ class _Titulo extends StatelessWidget {
 class _ListaTareas extends StatelessWidget {
   
   final items = [
-    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66) ),
-    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A) ),
-    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5) ),
-    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF) ),
-    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66) ),
-    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A) ),
-    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5) ),
-    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF) ),
+    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66), colorDark: Color(0xFFBB86F8) ),
+    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A), colorDark: Color(0xFF3700B3) ),
+    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5), colorDark: Color(0xFF03DAC6) ),
+    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF), colorDark: Color(0xFFBB86F8) ),
+    const _ListItem( titulo: 'Orange',        color: Color(0xffF08F66), colorDark: Color(0xFF3700B3) ),
+    const _ListItem( titulo: 'Family',        color: Color(0xffF2A38A), colorDark: Color(0xFF03DAC6) ),
+    const _ListItem( titulo: 'Subscriptions', color: Color(0xffF7CDD5), colorDark: Color(0xFFBB86F8) ),
+    const _ListItem( titulo: 'Books',         color: Color(0xffFCEBAF), colorDark: Color(0xFF3700B3) ),
   ];
 
   @override
@@ -206,14 +218,18 @@ class _ListItem extends StatelessWidget {
 
   final String titulo;
   final Color color; 
+  final Color colorDark;
   
   const _ListItem({
     required this.titulo, 
-    required this.color,
+    required this.color, 
+    required this.colorDark,
   });
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Container(
       padding: EdgeInsets.all( 25.0),
       alignment: Alignment.centerLeft,
@@ -221,7 +237,7 @@ class _ListItem extends StatelessWidget {
       margin: EdgeInsets.all(10),
       height: 130,
       decoration: BoxDecoration(
-        color: color,
+        color: (appTheme.darkMode) ? colorDark : color,
         borderRadius: BorderRadius.circular( 25.0 ),
       ),
     );
