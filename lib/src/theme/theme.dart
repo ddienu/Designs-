@@ -36,7 +36,23 @@ class ThemeChanger extends ChangeNotifier {
       case 3: //Custom theme
         _darkMode     = false;
         _customTheme  = true;
-        _currentTheme = ThemeData.light();
+        _currentTheme = ThemeData.light().copyWith(
+        drawerTheme: DrawerThemeData(
+          backgroundColor: Color(0XFF16202B)
+        ),
+        appBarTheme: AppBarTheme(
+          color: Color(0XFF16202B)
+        ),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(
+            color: Colors.white
+          )
+        ),
+        scaffoldBackgroundColor: Color(0XFF16202B),
+        colorScheme: ColorScheme.light(
+          secondary: Color(0xFF48A0EB),
+        )
+      );
         
         break;
 
