@@ -1,3 +1,6 @@
+import 'package:disenos_app/src/labs/slideshow_page.dart';
+import 'package:disenos_app/src/pages/Slideshow_page.dart';
+import 'package:disenos_app/src/pages/sliver_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -23,7 +26,26 @@ class LauncherTabletPage extends StatelessWidget {
         backgroundColor: appTheme.colorScheme.secondary,
       ),
       drawer: _MenuPrincipal(),
-      body: _ListaOpciones(),
+      body: Row(
+        children: [
+          Container(
+            width: 300,
+            height: double.infinity,
+            child: _ListaOpciones(),
+          ),
+
+          Container(
+            width: 1,
+            height: double.infinity,
+            color: appTheme.colorScheme.secondary,
+          ),
+          
+          Expanded(
+            child: SlideshowPage()
+            ),
+        ],
+      ),
+      //body: _ListaOpciones(),
     );
   }
 }
