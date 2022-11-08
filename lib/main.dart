@@ -31,7 +31,13 @@ class MyApp extends StatelessWidget {
       theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Designs App',
-      home: LauncherPage(),
+      home: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) { 
+
+          print('Orientation $orientation');
+          
+          return LauncherPage();
+         },)
     );
   }
 }

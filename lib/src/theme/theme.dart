@@ -23,9 +23,6 @@ class ThemeChanger extends ChangeNotifier {
         _darkMode     = true;
         _customTheme  = false;
         _currentTheme = ThemeData.dark().copyWith(
-          appBarTheme: AppBarTheme(
-            color: Color(0XFF313130)
-          ),
           colorScheme: ColorScheme.dark(
             secondary: Colors.pink,
           )
@@ -39,9 +36,6 @@ class ThemeChanger extends ChangeNotifier {
         _currentTheme = ThemeData.light().copyWith(
         drawerTheme: DrawerThemeData(
           backgroundColor: Color(0XFF16202B)
-        ),
-        appBarTheme: AppBarTheme(
-          color: Color(0XFF16202B)
         ),
         textTheme: TextTheme(
           bodyText1: TextStyle(
@@ -73,9 +67,6 @@ class ThemeChanger extends ChangeNotifier {
 
     if( value ){
       _currentTheme = ThemeData.dark().copyWith(
-        appBarTheme: AppBarTheme(
-          color: Color(0XFF313130)
-        ),
           colorScheme: ColorScheme.dark(
             secondary: Colors.pink,
           )
@@ -94,9 +85,6 @@ class ThemeChanger extends ChangeNotifier {
       _currentTheme = ThemeData.light().copyWith(
         drawerTheme: DrawerThemeData(
           backgroundColor: Color(0XFF16202B)
-        ),
-        appBarTheme: AppBarTheme(
-          color: Color(0XFF16202B)
         ),
         textTheme: TextTheme(
           bodyText1: TextStyle(
