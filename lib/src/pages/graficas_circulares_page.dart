@@ -1,13 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'package:disenos_app/src/theme/theme.dart';
 import 'package:disenos_app/src/widgets/radial_progress.dart';
-import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 
 class GraficasCircularesPage extends StatefulWidget {
-  const GraficasCircularesPage({Key? key, this.colorBoton = Colors.blue,}) : super(key: key);
+  const GraficasCircularesPage({Key? key,}) : super(key: key);
   
-  final Color colorBoton;
+  //final Color colorBoton;
 
   @override
   State<GraficasCircularesPage> createState() => _GraficasCircularesPageState();
@@ -19,10 +21,12 @@ class _GraficasCircularesPageState extends State<GraficasCircularesPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon( Icons.refresh),
-        backgroundColor: widget.colorBoton,
+        backgroundColor: appTheme.currentTheme.colorScheme.secondary,
         onPressed: (){
           setState(() {
             porcentaje += 10;

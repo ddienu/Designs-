@@ -33,6 +33,9 @@ class _ButtonNewList extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     final appTheme = Provider.of<ThemeChanger>(context);
+
+    bool isLarge = (size.width > 500);
+
     return Positioned(
       right: 0,
       bottom: 0,
@@ -43,7 +46,7 @@ class _ButtonNewList extends StatelessWidget {
           )
         ),
         height: 90.0,
-        minWidth: size.width * 0.9,
+        minWidth: (isLarge) ? size.width - 350 : size.width * 0.9,
         color: ( appTheme.darkMode) ? appTheme.currentTheme.colorScheme.secondary : Color(0xFFED6762),
         onPressed: (){},
         child: Text('CREATE NEW LIST', 

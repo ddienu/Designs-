@@ -1,4 +1,6 @@
+import 'package:disenos_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CuadradoAnimadoPage extends StatelessWidget {
   const CuadradoAnimadoPage({Key? key}) : super(key: key);
@@ -111,11 +113,13 @@ class _Cuadrado extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
     return Container(
       height: 70.0,
       width: 70.0,
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: appTheme.currentTheme.colorScheme.secondary,
       ),
     );
   }
