@@ -1,4 +1,5 @@
 import 'package:disenos_app/src/labs/slideshow_page.dart';
+import 'package:disenos_app/src/models/layout_model.dart';
 import 'package:disenos_app/src/pages/Slideshow_page.dart';
 import 'package:disenos_app/src/pages/sliver_list_page.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class LauncherTabletPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
+    final layoutModel = Provider.of<LayoutModel>(context);
     
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +44,7 @@ class LauncherTabletPage extends StatelessWidget {
           ),
           
           Expanded(
-            child: SlideshowPage()
+            child: layoutModel.currentPage
             ),
         ],
       ),
@@ -125,8 +128,11 @@ class _ListaOpciones extends StatelessWidget {
           title: Text(pageRoutes[index].title),
           trailing: Icon( Icons.chevron_right, color: accentColor,),
           onTap: (){
-            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => pageRoutes[index].page)
-            );
+            //Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => pageRoutes[index].page)
+            final layoutModel = Provider.of<LayoutModel>(context, listen: false);
+
+            layoutModel.currentPage = pageRoutes[index].page;
+            
           },
       ),
       controller: ScrollController(),

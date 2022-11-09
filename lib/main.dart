@@ -1,3 +1,4 @@
+import 'package:disenos_app/src/models/layout_model.dart';
 import 'package:disenos_app/src/pages/launcher_tablet_page.dart';
 import 'package:disenos_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,18 @@ import 'package:provider/provider.dart';
 //import 'package:disenos_app/src/pages/pinterest_page.dart';
 
 void main() => runApp(
-  ChangeNotifierProvider(
-    create: ((context) => ThemeChanger( 2 )
-    ),
-    child: const MyApp())
+  MultiProvider(
+    providers: [
+    ChangeNotifierProvider<ThemeChanger>(
+      create: ((context) => ThemeChanger( 2 )
+      )
+    ), 
+    ChangeNotifierProvider(
+      create: ((context) => LayoutModel()
+      ) 
+    ), 
+  ],
+      child: const MyApp()),
   );
 
 class MyApp extends StatelessWidget {
